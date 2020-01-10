@@ -6,6 +6,11 @@ public class Settings {
 	private String name;
 	private String password;
 	private String url;
+	//check whether the settings are set by the user 
+	private boolean ready;
+	public boolean getReady() {
+		return ready;
+	}
 	public String getName() {
 		return name;
 	}
@@ -14,6 +19,9 @@ public class Settings {
 	}
 	public String getUrl() {
 		return url;
+	}
+	public void setReady(boolean state) {
+		ready = state;
 	}
 	public void setName(String name) {
 		this.name = name;

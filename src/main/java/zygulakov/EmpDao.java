@@ -1,9 +1,9 @@
 package zygulakov;
 
 public interface EmpDao {
-	boolean create(Employee emp);
-	boolean update(Employee emp);
-	boolean remove(Employee emp);
+	void add(Employee emp);
+	void update(Employee emp);
+	void remove(Employee emp);
 	Employee get(String name);
 	Employee get(int eId);
 	

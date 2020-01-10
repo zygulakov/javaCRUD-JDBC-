@@ -11,7 +11,7 @@ public class App {
 		EmpDao em = new EmpDaoImpl(json.getSettings());
 		Employee emp = em.get(1);
 		em.remove(1);
-		System.out.println(emp);
+		System.out.println(emp); 
 		
 		
 		/*

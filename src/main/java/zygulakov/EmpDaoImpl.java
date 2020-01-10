@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
 public class EmpDaoImpl implements EmpDao {
 	// Settings for this class to function
@@ -73,6 +74,16 @@ public class EmpDaoImpl implements EmpDao {
 			System.out.println("something went wrong try again");
 		}
 		return em;
+	}
+
+	@Override
+	public List<Employee> getAll() {
+		List<Employee> emps = null;
+		try {
+			
+		}catch (Exception e) {
+		}
+		return emps;
 	}
 
 }

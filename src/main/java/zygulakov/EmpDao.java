@@ -3,8 +3,7 @@ package zygulakov;
 public interface EmpDao {
 	void add(Employee emp);
 	void update(Employee emp);
-	void remove(Employee emp);
-	Employee get(String name);
+	void remove(int id);
 	Employee get(int eId);
 	
 

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmpDaoImpl implements EmpDao {
@@ -44,11 +46,12 @@ public class EmpDaoImpl implements EmpDao {
 	}
 
 	@Override
-	public void remove(int i) {
+	public void remove(int id) {
+		System.out.println("removing Employee by id: "+id);
 		try {
 			PreparedStatement st = conn.prepareStatement("DELETE FROM Employees WHERE EmpID = ?");
-			st.setInt(1, i);
-			
+			st.setInt(1, id);
+
 			st.executeUpdate();
 			System.out.println("Done!");
 		} catch (Exception e) {
@@ -61,14 +64,18 @@ public class EmpDaoImpl implements EmpDao {
 	@Override
 	public Employee get(int id) {
 		Employee em = null;
+		System.out.println("getting Employee by id: "+id);
 		try {
 			PreparedStatement st = conn.prepareStatement("SELECT * FROM Employees WHERE EmpID = ?");
 			st.setInt(1, id);
 			ResultSet rs = st.executeQuery();
 			rs.next();
-			em = new Employee(rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(1));
-			System.out.println("Done!");
-
+			if(rs.isAfterLast()) {
+				em = new Employee(rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(1));
+				System.out.println("Done!");
+				
+			}
+			System.out.println("There is no any Employee by this id sorry");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("something went wrong try again");
@@ -78,10 +85,24 @@ public class EmpDaoImpl implements EmpDao {
 
 	@Override
 	public List<Employee> getAll() {
-		List<Employee> emps = null;
+		List<Employee> emps = new ArrayList<>();
+		Statement st = null;
+		ResultSet rs = null;
+		System.out.println("getting all Eployees ...");
 		try {
-			
-		}catch (Exception e) {
+			st = conn.createStatement();
+			rs = st.executeQuery("SELECT * FROM Employees");
+			while (rs.next()) {
+				Employee em = new Employee(rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(1));
+				emps.add(em);
+
+			}
+			rs.close();
+			st.close();
+			System.out.println("Done!");
+		} catch (Exception e) {
+			e.printStackTrace();
+
 		}
 		return emps;
 	}

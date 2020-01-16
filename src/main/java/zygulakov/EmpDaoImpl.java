@@ -13,6 +13,7 @@ public class EmpDaoImpl implements EmpDao {
 	private Settings set;
 	Connection conn;
 
+	// Settings object for connecting to database
 	public EmpDaoImpl(Settings set) {
 		this.set = set;
 		try {
@@ -24,6 +25,7 @@ public class EmpDaoImpl implements EmpDao {
 	}
 
 	@Override
+	// adding Employee object to database
 	public void add(Employee emp) {
 		try {
 			PreparedStatement st = conn.prepareStatement("INSERT INTO Employees VALUES (?,?,?,?)");
@@ -46,12 +48,20 @@ public class EmpDaoImpl implements EmpDao {
 	}
 
 	@Override
+	// removing data from database by ID if exist
 	public void remove(int id) {
-		System.out.println("removing Employee by id: "+id);
+		System.out.println("removing Employee by id: " + id);
 		try {
+			// check whether the data exist
+			Statement s = conn.createStatement();
+			// returns false if no such data exist
+			boolean exist = s.executeQuery("SELECT * FROM Employees WHERE EmpID = " + id).next();
+			if (!exist) {
+				System.out.println("No such ID");
+				return;
+			}
 			PreparedStatement st = conn.prepareStatement("DELETE FROM Employees WHERE EmpID = ?");
 			st.setInt(1, id);
-
 			st.executeUpdate();
 			System.out.println("Done!");
 		} catch (Exception e) {
@@ -64,18 +74,18 @@ public class EmpDaoImpl implements EmpDao {
 	@Override
 	public Employee get(int id) {
 		Employee em = null;
-		System.out.println("getting Employee by id: "+id);
+		System.out.println("getting Employee by id: " + id);
 		try {
 			PreparedStatement st = conn.prepareStatement("SELECT * FROM Employees WHERE EmpID = ?");
 			st.setInt(1, id);
 			ResultSet rs = st.executeQuery();
-			rs.next();
-			if(rs.isAfterLast()) {
+			// to check whether the data exist
+			if (rs.next()) {
 				em = new Employee(rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(1));
 				System.out.println("Done!");
-				
-			}
-			System.out.println("There is no any Employee by this id sorry");
+
+			} else
+				System.out.println("There is no any Employee by this id sorry");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("something went wrong try again");
@@ -84,6 +94,7 @@ public class EmpDaoImpl implements EmpDao {
 	}
 
 	@Override
+	// fetching all data as Employee objects ,returning as List of objects
 	public List<Employee> getAll() {
 		List<Employee> emps = new ArrayList<>();
 		Statement st = null;

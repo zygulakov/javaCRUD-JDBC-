@@ -10,9 +10,11 @@ public class App {
 		System.out.println("pls enter \"-h\" for help");
 		EmpDao em = new EmpDaoImpl(json.getSettings());
 		
-		Employee emp = em.get(1);
+		//em.remove(11);
+		Employee emp = em.get(2);
+		System.out.println(emp);
 
-		System.out.println(em.getAll()); 
+		//System.out.println(em.getAll()); 
 		
 		
 		

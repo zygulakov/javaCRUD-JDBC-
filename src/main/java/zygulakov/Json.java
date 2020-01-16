@@ -10,6 +10,7 @@ public class Json {
 	private final String fileName = "settings.json";
 	private Settings set;
 	public Json() {
+		//setting up all settings checking possibility of connection
 		try {
 			set = set();
 			check();
@@ -21,6 +22,7 @@ public class Json {
 	private void check() {
 		try {			
 		Connection conn = DriverManager.getConnection(set.getUrl(),set.getName(),set.getPassword());
+		conn.close();
 		}catch (Exception e) {
 			System.out.println(e);
 			System.out.println("check settings,something is wrong");
@@ -40,7 +42,6 @@ public class Json {
 			set.setName("USERNAME HERE");
 			set.setPassword("PASSWORD HERE");
 			set.setUrl("URL OF YOUR DATABASE HERE");
-			//set.setReady(false);
 			mapper.writeValue(file, set);
 			System.out.println("pls setup setting.json file in your root directory  and restart app\n"+file.getAbsolutePath());
 			return set;

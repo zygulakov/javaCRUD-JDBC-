@@ -10,12 +10,10 @@ import java.util.List;
 
 public class EmpDaoImpl implements EmpDao {
 	// Settings for this class to function
-	private Settings set;
 	Connection conn;
 
 	// Settings object for connecting to database
 	public EmpDaoImpl(Settings set) {
-		this.set = set;
 		try {
 			conn = DriverManager.getConnection(set.getUrl(), set.getName(), set.getPassword());
 		} catch (Exception e) {

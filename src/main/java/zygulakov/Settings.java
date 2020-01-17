@@ -1,7 +1,7 @@
 package zygulakov;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.databind.*;
+
 
 @JsonAutoDetect
 public class Settings {

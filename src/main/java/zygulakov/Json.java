@@ -25,7 +25,9 @@ public class Json {
 		conn.close();
 		}catch (Exception e) {
 			System.out.println(e);
-			System.out.println("check settings,something is wrong");
+			System.out.println("check settings,wrong username or password");
+			System.out.println("Exiting...");
+			System.exit(0);
 			
 		}
 		
@@ -43,7 +45,7 @@ public class Json {
 			set.setPassword("PASSWORD HERE");
 			set.setUrl("URL OF YOUR DATABASE HERE");
 			mapper.writeValue(file, set);
-			System.out.println("pls setup setting.json file in your root directory  and restart app\n"+file.getAbsolutePath());
+			System.out.println("\nplease setup setting.json file in your root directory of an app  and restart app\n"+file.getAbsolutePath());
 			return set;
 		}
 		

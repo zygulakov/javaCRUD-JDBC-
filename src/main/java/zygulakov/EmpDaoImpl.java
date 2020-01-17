@@ -40,27 +40,26 @@ public class EmpDaoImpl implements EmpDao {
 
 	}
 
-	@Override
-	public void update(Employee emp) {
-
-	}
 
 	@Override
 	// removing data from database by ID if exist
-	public void remove(int id) {
-		System.out.println("removing Employee by id: " + id);
+	public void remove(int... ids ) {
+		
 		try {
 			// check whether the data exist
 			Statement s = conn.createStatement();
 			// returns false if no such data exist
+			for (int id : ids) {
+				
 			boolean exist = s.executeQuery("SELECT * FROM Employees WHERE EmpID = " + id).next();
 			if (!exist) {
-				System.out.println("No such ID");
+				System.out.println("No such ID :"+id);
 				return;
 			}
 			PreparedStatement st = conn.prepareStatement("DELETE FROM Employees WHERE EmpID = ?");
 			st.setInt(1, id);
 			st.executeUpdate();
+			}
 			System.out.println("Done!");
 		} catch (Exception e) {
 			e.printStackTrace();

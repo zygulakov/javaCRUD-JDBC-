@@ -51,6 +51,14 @@ public class App {
 				em.remove(id);
 				
 			}
+			//-u for updating data <old id> <new name> <new lastname> <new city>
+			if(s[0].equals("-u")) {
+				id = Integer.parseInt(s[1]);
+				name = s[2];
+				lastName = s[3];
+				city = s[4];
+				
+			}
 
 		}
 

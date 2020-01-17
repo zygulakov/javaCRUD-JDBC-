@@ -34,8 +34,8 @@ public class EmpDaoImpl implements EmpDao {
 			st.executeQuery();
 			System.out.println("Done!");
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("something went wrong try again");
+			//e.printStackTrace();
+			System.out.println("there is already exist same id use unique id");
 		}
 
 	}
@@ -97,7 +97,7 @@ public class EmpDaoImpl implements EmpDao {
 		List<Employee> emps = new ArrayList<>();
 		Statement st = null;
 		ResultSet rs = null;
-		System.out.println("getting all Eployees ...");
+		
 		try {
 			st = conn.createStatement();
 			rs = st.executeQuery("SELECT * FROM Employees");
@@ -108,7 +108,6 @@ public class EmpDaoImpl implements EmpDao {
 			}
 			rs.close();
 			st.close();
-			System.out.println("Done!");
 		} catch (Exception e) {
 			e.printStackTrace();
 

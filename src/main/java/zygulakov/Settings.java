@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect
 public class Settings {
-	private String name;
+	private String name; 
 	private String password;
 	private String url;
 	// check whether the settings are set by the user

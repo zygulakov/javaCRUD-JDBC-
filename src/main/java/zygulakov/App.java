@@ -2,7 +2,7 @@ package zygulakov;
 
 import java.io.*;
 
-public class App {
+public class App { 
 	private static BufferedReader reader;
 	private static int id;
 	private static String name, lastName, city, str;

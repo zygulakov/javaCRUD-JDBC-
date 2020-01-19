@@ -16,10 +16,24 @@ public class EmpDaoImpl implements EmpDao {
 	public EmpDaoImpl(Settings set) {
 		try {
 			conn = DriverManager.getConnection(set.getUrl(), set.getName(), set.getPassword());
+			createTable();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+	}
+	// A method for creating table for need of a app ;
+	private void createTable() {
+		try {
+			
+		Statement st = conn.createStatement();
+		st.executeUpdate("create table if not exists Employees "
+				+ "(EmpID int primary key,FirstName varchar(100) not null,"
+				+ "LastName varchar(100) not null, City varchar(40) not null)");
+		}catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	@Override

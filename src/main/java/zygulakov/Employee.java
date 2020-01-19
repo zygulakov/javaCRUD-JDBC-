@@ -6,7 +6,7 @@ public class Employee {
 	private String city;
 	private int empId;
 
-	public Employee() {
+	public Employee() { 
 
 	}
 
